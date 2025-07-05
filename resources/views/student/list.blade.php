@@ -43,6 +43,12 @@
         <div class="">
             {{ $students->links() }}
         </div>
+        @if($students->count()==0)
+            <div class="text-center p-4">
+                <img style="width: 100px;" src="{{ asset('image/sorry.svg') }}" alt="">
+                <p class="mb-0">{{ 'No data to show'}}</p>
+            </div>
+        @endif
     </div>
 </body>
 </html>
