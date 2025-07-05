@@ -29,7 +29,7 @@
             <tbody>
                 @foreach ($students as $student)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->iteration + ($students->currentPage() - 1) * $students->perPage() }}</td>
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->gender }}</td>
                     <td>{{ $student->address }}</td>
