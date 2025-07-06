@@ -24,3 +24,5 @@ route::post('/store',[StudentController::class, 'store'])->name('student.store')
 route::get('/edit/{id}',[StudentController::class, 'edit'])->name('student.edit');
 route::post('/update/{id}',[StudentController::class, 'update'])->name('student.update');
 route::post('/destroy/{id}',[StudentController::class, 'destroy'])->name('student.destroy');
+
+

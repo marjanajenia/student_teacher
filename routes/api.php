@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/list', [TeacherController::class, 'list']);
+Route::post('/teacherRegistration', [TeacherController::class, 'teacherRegistration']);
+Route::post('/teacherRegistrationUpdate', [TeacherController::class, 'teacherRegistrationUpdate']);
