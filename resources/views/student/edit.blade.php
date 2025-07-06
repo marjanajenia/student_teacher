@@ -10,13 +10,13 @@
 <body>
     <div class="container">
         <h2 class="text-center my-4">Student Registration Form</h2>
-        <form action="{{ route('student.store') }}" method="POST">
+        <form action="{{ route('student.update', $student->id) }}" method="POST">
             @csrf
             <div class="row"style="margin:5%;">
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="name" class="form-control-label">Name</label>
-                        <input class="form-control" type="text" name="name" placeholder="Enter your name">
+                        <input class="form-control" type="text" name="name" placeholder="Enter your name" value="{{ $student->name }}">
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -27,9 +27,9 @@
                         <label class="form-control-label">Gender</label>
                         <select class="form-control" id="gender" name="gender">
                             <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
+                            <option value="male" {{ $student->gender == 'male' ? 'selected' : ''}}>Male</option>
+                            <option value="female" {{ $student->gender == 'female' ? 'selected' : ''}}>Female</option>
+                            <option value="other" {{ $student->gender == 'other' ? 'selected' : ''}}>Other</option>
                         </select>
                         @error('gender')
                             <span class="text-danger">{{ $message }}</span>
@@ -39,7 +39,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-control-label">Address</label>
-                        <input class="form-control" type="text" name="address" placeholder="Enter your Address">
+                        <input class="form-control" type="text" name="address" placeholder="Enter your Address" value="{{ $student->address }}">
                         @error('address')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -48,7 +48,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-control-label">Phone</label>
-                        <input class="form-control" type="tel" name="phone" placeholder="Enter your Phone num">
+                        <input class="form-control" type="tel" name="phone" placeholder="Enter your Phone num" value="{{ $student->phone }}">
                         @error('phone')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -57,7 +57,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-control-label">Date of Birth</label>
-                        <input class="form-control" type="date" name="dob" placeholder="Enter your date of birth">
+                        <input class="form-control" type="date" name="dob" placeholder="Enter your date of birth" value="{{ $student->dob }}">
                         @error('dob')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -66,7 +66,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-control-label">Date of Join</label>
-                        <input class="form-control" type="date" name="date_of_join" placeholder="Enter your join date">
+                        <input class="form-control" type="date" name="date_of_join" placeholder="Enter your join date" value="{{ $student->date_of_join }}">
                         @error('date_of_join')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -78,7 +78,5 @@
             </div>
         </form>
     </div>
-
-
 </body>
 </html>

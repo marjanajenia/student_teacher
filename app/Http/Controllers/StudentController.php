@@ -18,7 +18,7 @@ class StudentController extends Controller
             'name' => 'required|string',
             'gender' => 'required|string',
             'address' => 'required|string',
-            'phone' => 'required|string',
+            'phone' => 'required|digits:11',
             'dob' => 'required|date',
             'date_of_join' => 'required|date',
          ]);
@@ -31,5 +31,32 @@ class StudentController extends Controller
             'date_of_join' => $request->date_of_join,
         ]);
         return redirect()->route('student.list');
+    }
+    public function edit($id){
+        $student = Student::find($id);
+        return view('student.edit', compact('student'));
+    }
+    public function update(Request $request, $id){
+        $request->validate([
+            'name' => 'required|string',
+            'gender' => 'required|string',
+            'address' => 'required|string',
+            'phone' => 'required|digits:11',
+            'dob' => 'required|date',
+            'date_of_join' => 'required|date',
+        ]);
+        Student::where('id', $id)->update([
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'dob' => $request->dob,
+            'date_of_join' => $request->date_of_join,
+        ]);
+        return redirect()->route('student.list');
+    }
+    public function destroy($id){
+        Student::where('id', $id)->delete();
+        return redirect()->back();
     }
 }
