@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 
@@ -18,11 +19,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-route::get('/list',[StudentController::class, 'list'])->name('student.list');
-route::get('/create',[StudentController::class, 'create'])->name('student.create');
-route::post('/store',[StudentController::class, 'store'])->name('student.store');
-route::get('/edit/{id}',[StudentController::class, 'edit'])->name('student.edit');
-route::post('/update/{id}',[StudentController::class, 'update'])->name('student.update');
-route::post('/destroy/{id}',[StudentController::class, 'destroy'])->name('student.destroy');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::get('/list',[StudentController::class, 'list'])->name('student.list');
+Route::get('/create',[StudentController::class, 'create'])->name('student.create');
+Route::post('/store',[StudentController::class, 'store'])->name('student.store');
+Route::get('/edit/{id}',[StudentController::class, 'edit'])->name('student.edit');
+Route::post('/update/{id}',[StudentController::class, 'update'])->name('student.update');
+Route::post('/destroy/{id}',[StudentController::class, 'destroy'])->name('student.destroy');
 
 
+require __DIR__.'/auth.php';
