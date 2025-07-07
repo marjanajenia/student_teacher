@@ -29,12 +29,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/list',[StudentController::class, 'list'])->name('student.list');
-Route::get('/create',[StudentController::class, 'create'])->name('student.create');
-Route::post('/store',[StudentController::class, 'store'])->name('student.store');
-Route::get('/edit/{id}',[StudentController::class, 'edit'])->name('student.edit');
-Route::post('/update/{id}',[StudentController::class, 'update'])->name('student.update');
-Route::post('/destroy/{id}',[StudentController::class, 'destroy'])->name('student.destroy');
+Route::middleware('auth')->group(function (){
+    Route::get('/list',[StudentController::class, 'list'])->name('student.list');
+    Route::get('/create',[StudentController::class, 'create'])->name('student.create');
+    Route::post('/store',[StudentController::class, 'store'])->name('student.store');
+    Route::get('/edit/{id}',[StudentController::class, 'edit'])->name('student.edit');
+    Route::post('/update/{id}',[StudentController::class, 'update'])->name('student.update');
+    Route::post('/destroy/{id}',[StudentController::class, 'destroy'])->name('student.destroy');
+});
+
+
 
 
 require __DIR__.'/auth.php';
