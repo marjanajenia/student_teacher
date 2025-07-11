@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function (){
     Route::post('/destroy/{id}',[StudentController::class, 'destroy'])->name('student.destroy');
 });
 
+Route::get('/dash', function (){ return view('student.dashboard');});
+
 
 
 
